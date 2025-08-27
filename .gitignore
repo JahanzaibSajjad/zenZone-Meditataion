@@ -19,3 +19,4 @@ build/
 
 # Env files
 .env
+zenZone-backend/firebase-admin-key.json

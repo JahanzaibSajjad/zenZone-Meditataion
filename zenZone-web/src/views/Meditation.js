@@ -1,0 +1,77 @@
+import React, { useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import AppsSection from "../components/common/AppsSection";
+import Footer from "../components/common/Footer";
+import TopNav from "../components/common/Navbar";
+import Meditations from "../components/meditation/Meditations";
+import MeditationVideo from "../components/meditation/MeditationVideo";
+
+const Meditation = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <>
+      <div className="bg-shine">
+        <TopNav />
+        <div className="appSection pb-6">
+          <Row className="appSectionInner">
+            <Col className="d-flex align-items-center" lg="6" md="12">
+              <div className="pt-5 d-flex justify-content-center">
+                <img
+                  className="homeImg"
+                  src="assets/images/meditation-hero.png"
+                  alt="img"
+                />
+              </div>
+            </Col>
+            <Col
+              className="d-flex align-items-center justify-content-md-center justify-content-lg-start"
+              lg="6"
+              md="12"
+            >
+              <div>
+                <div className="mx-md-5 my-5">
+                  <p className="intoText text-center-medium MorganiteFont">
+                    BALANCED HEALING
+                    <br />
+                    FOR{" "}
+                    <span className="mainDarkColor MorganiteFont">
+                      HEROES
+                    </span>
+                  </p>
+                  <div className="py-2 px-3 leftBar">
+                    <h4 className="mb-0 line-height SansProFont paragraphDim text-lg">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      <br />
+                      industry. Lorem Ipsum has been the industry's standard
+                      dummy
+                      <br />
+                      text ever since the 1500s, when an unknown printer took a
+                      galley
+                      <br />
+                      of type and scrambled it to make a type specimen book.
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
+      <div className="my-5 py-5">
+        <MeditationVideo />
+      </div>
+      <div className="bg-shine bg-shine-meditation mt-5 pt-5">
+        <Meditations />
+        <div className="pt-5">
+          <AppsSection colored={false} />
+        </div>
+        <Footer colored={false} />
+      </div>
+    </>
+  );
+};
+
+export default Meditation;

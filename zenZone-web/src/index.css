@@ -1,0 +1,1249 @@
+@font-face {
+  font-family: "Morganite";
+  src: local("Morganite"),
+    url(./assets/fonts/Morganite-SemiBold.woff) format("woff");
+}
+
+@import url("https://fonts.cdnfonts.com/css/gilroy-bold");
+@import url("https://fonts.cdnfonts.com/css/montserrat");
+@import url("https://fonts.cdnfonts.com/css/source-sans-pro");
+@import url("https://fonts.cdnfonts.com/css/r-flex");
+
+.RFlexFont {
+  font-family: "R-Flex", sans-serif;
+}
+
+.MontserratFont {
+  font-family: "Montserrat", sans-serif;
+}
+
+.appSection .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.SansProFont {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+* {
+  font-family: "Gilroy-Regular", sans-serif;
+}
+
+strong {
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+.imgLogo {
+  width: 90px;
+  height: 90px;
+}
+
+.dropdown-toggle,
+.navbar-nav a,
+.navbar-nav a:hover,
+.navbar-nav a:active,
+.footerNav a,
+.footerNav a:hover,
+.footerNav a:active {
+  font-size: 1rem;
+  font-family: "Gilroy-Medium", sans-serif;
+  color: #272e5d !important;
+  text-decoration: none;
+  margin: 0 1.8rem;
+  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover,
+.dropdown-item:focus a,
+.dropdown-item:hover a,
+.active-dropdown a {
+  background-color: #e9ebf6 !important;
+  color: #000083 !important;
+  font-weight: 600 !important;
+}
+
+.dropdown-item a,
+.dropdown-item {
+  margin: 0 !important;
+  padding-right: 1.5rem;
+  font-weight: normal !important;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("../public/assets/images/nav-toggle.png") !important;
+}
+
+.navbar-light .navbar-toggler {
+  border: none !important;
+}
+
+.navbar-nav a.active,
+.active.nav-item.dropdown > a {
+  border-bottom: 2px solid black;
+}
+
+.navbar {
+  padding: 1rem 3rem;
+}
+
+.inheritHeight {
+  height: inherit;
+}
+
+.intoText {
+  font-size: 6.5rem;
+  letter-spacing: 0.5rem;
+  line-height: normal;
+}
+
+.headingText {
+  font-size: 3rem !important;
+}
+
+.mainDarkColor {
+  color: #000083;
+}
+
+.mainDarkbg {
+  background-color: #000083;
+}
+
+.leftBar {
+  border-left: 4px solid #000083;
+}
+
+.MorganiteFont {
+  font-family: "Morganite" !important;
+}
+
+.paragraphDim {
+  color: #7d7d7d;
+}
+
+.paragraphDim.fa {
+  color: #c9c6c6;
+}
+
+.homeImg {
+  width: 80%;
+  object-fit: contain;
+}
+
+.appImg {
+  width: 70%;
+}
+
+.biochemScroll {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.biochemVideoObj {
+  width: 410px;
+  display: inline-block;
+  margin: 0 1.5rem;
+}
+
+.biochemImg {
+  width: 410px;
+  height: 412px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 5px 5px 0 0;
+}
+
+.normalSpace {
+  white-space: normal;
+}
+
+.biochemScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.biochemScroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.bg-path {
+  background-image: url("../public/assets/images/Path.svg");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+}
+
+.bg-color {
+  background-color: #e9ebf6;
+}
+
+.bg-modal {
+  background-color: #efebff;
+  border-radius: 5px;
+}
+
+.bg-modal::after {
+  content: "";
+  display: block;
+  width: 55%;
+  margin: 2.5em 0rem 0rem;
+  border-bottom: solid #000083;
+}
+
+.bg-form {
+  background: #f8f8fe 0% 0% no-repeat padding-box;
+  box-shadow: 0px 33px 56px #efebff;
+  margin: 0 8rem;
+  padding: 4rem 0;
+}
+
+.bg-form::after {
+  content: "";
+  display: block;
+  width: 25%;
+  margin: 5em 0rem -4rem;
+  border-bottom: solid #000083;
+}
+
+.bookDiv {
+  border-radius: 5px;
+}
+
+.bookDiv::after {
+  content: "";
+  display: block;
+  width: 40%;
+  margin: 1em -1.45rem -1rem;
+  border-bottom: solid #000083;
+}
+
+.podcastDiv {
+  background-image: linear-gradient(to right, #e9ebf6 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  border-radius: 5px;
+}
+
+.podcastDiv:hover::after {
+  content: "";
+  display: block;
+  width: 40%;
+  margin: 1em 0rem -1rem;
+  border-bottom: solid #000083;
+}
+
+.podcastDiv:hover {
+  background-position: left bottom;
+  box-shadow: 0px 33px 56px #623cea2e;
+}
+
+.main-text-color {
+  color: #7f7fc1;
+}
+
+.main-bg {
+  background-color: #7f7fc1;
+}
+
+.videoNumber {
+  font-size: 18rem;
+  color: #6d44ff;
+  opacity: 0.07;
+}
+
+.videoNumberDiv {
+  margin-top: -2.5rem;
+}
+
+.videoNumberSmall {
+  font-size: 6rem;
+  color: #6d44ff;
+  opacity: 0.07;
+}
+
+.videoNumberSmallDark {
+  font-size: 6rem;
+  color: #6d44ff;
+  opacity: 0.15;
+}
+
+.videoTitle {
+  top: 26%;
+  font-size: 0.7rem;
+}
+
+.videoImg {
+  margin-top: 2.5rem;
+  width: 13rem;
+  height: 21rem;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.imgPlayIcon {
+  width: 3rem;
+  height: 3rem;
+  top: 45%;
+  left: 40%;
+}
+
+.videoTextColor {
+  color: #272e5d;
+  line-height: 1.2rem;
+}
+
+.anchor,
+.anchor:hover,
+.headingDark {
+  color: #272e5d;
+}
+
+.eventDiv {
+  width: 100%;
+  height: 100%;
+  border-radius: 2%;
+}
+
+.eventDivOuter {
+  width: 100%;
+  height: 100%;
+}
+
+.videoDiv {
+  width: 45%;
+  margin: 0 2.5%;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    #e9ebf6 49%,
+    transparent 50%
+  ) !important;
+}
+
+.videoDiv,
+.bioVideoDiv {
+  background-image: linear-gradient(to right, #e9ebf6 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+}
+
+.bioVideoDiv {
+  border-radius: 5px;
+}
+
+.meditationDiv {
+  background-image: linear-gradient(to right, #e9ebf6 50%, transparent 50%);
+  position: relative;
+  border-radius: 5px;
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+}
+
+.videoDiv:hover {
+  background-image: linear-gradient(
+    to right,
+    #e9ebf6 50%,
+    white 50%
+  ) !important;
+  background-position: left bottom;
+  box-shadow: 5px 33px 56px #623cea2e;
+}
+
+.meditationDiv:hover {
+  background-position: left bottom;
+  box-shadow: 5px 33px 56px #623cea2e;
+}
+
+.bioVideoDiv:hover {
+  background-position: left bottom;
+  box-shadow: -5px 33px 56px #623cea2e;
+}
+
+.bioVideoDiv:hover::after,
+.videoDiv:hover:after {
+  content: "";
+  display: block;
+  width: 70%;
+  margin: 1em -0.1rem 0;
+  border-bottom: solid #000083;
+}
+
+.meditationDiv:hover:after {
+  content: "";
+  height: 70%;
+  width: 4px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #000083;
+}
+
+.w-40 {
+  width: 40% !important;
+}
+
+.w-80 {
+  width: 80% !important;
+}
+
+.shareImg {
+  width: 4rem;
+  object-fit: contain;
+}
+
+.absoluteshareImg {
+  width: 4.5rem;
+  object-fit: contain;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.absoluteshareImgBio {
+  width: 4.5rem;
+  object-fit: contain;
+  position: absolute;
+  bottom: 5%;
+  right: 3%;
+}
+
+.absoluteshareImgLarge {
+  width: 5rem;
+  object-fit: contain;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.absolutePlayImg {
+  object-fit: contain;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+.absolutePlayImgBio {
+  object-fit: contain;
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
+.absoluteShareIcons {
+  position: absolute;
+  bottom: 10%;
+  right: 5.5%;
+}
+
+.absoluteShareIconsBio {
+  position: absolute;
+  bottom: 10%;
+  right: 3.4%;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.mt-hover {
+  margin-top: -4rem !important;
+}
+
+.video-desc {
+  height: 9.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bio-vid-bg-text {
+  font-size: 15rem;
+  white-space: nowrap;
+  margin-left: 2rem;
+  letter-spacing: 21.98px;
+  color: #6d44ff;
+  text-transform: uppercase;
+  opacity: 0.07;
+}
+
+.bio-vid-text {
+  position: absolute;
+  top: 10rem;
+  letter-spacing: 0px;
+  color: #6d44ff;
+  font-size: 2.5rem;
+  left: 8rem;
+  font-weight: bold;
+  opacity: 0.6;
+}
+
+.bio-vid-secondary-text {
+  position: absolute;
+  letter-spacing: 7.28px;
+  color: #272e5d;
+  text-transform: uppercase;
+  opacity: 1;
+  top: 14rem;
+  left: 0.5rem;
+  font-size: 7rem;
+  text-align: center;
+  line-height: 6rem;
+}
+
+.bio-desc {
+  height: 9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 1rem;
+}
+
+.meditation-desc {
+  height: 6rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.desc {
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+}
+
+.shareIcon:hover {
+  color: #6d44ff !important;
+}
+
+.appSection {
+  margin: 0 5rem;
+  padding-top: 7rem;
+}
+
+.bg-shine {
+  background: #e9ebf6 0% 0% no-repeat padding-box;
+  background-image: url("../public/assets/images/Ellipse-large50.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-shine-biochem {
+  background-position: 0 4rem !important;
+}
+
+.bg-shine-biochem-vid {
+  background-image: url("../public/assets/images/Ellipse-large50.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: 0rem -65rem;
+}
+
+.bg-shine-home-vid {
+  background-image: url("../public/assets/images/Ellipse-large50.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: 8rem 20rem;
+}
+
+.bg-shine-meditation {
+  background-image: url("../public/assets/images/Ellipse-large.png");
+  background-position: 0rem 82rem !important;
+  background-size: contain;
+}
+
+.bg-shine-large {
+  background-size: contain;
+  background-position: 0 -24rem;
+}
+
+.bg-rectangle {
+  background: #0000000d 0% 0% no-repeat padding-box;
+  opacity: 0.6;
+  width: 90%;
+  margin: 0 5%;
+  height: 679px;
+}
+
+.bg-rectangle-opaque {
+  background: #0000000a 0% 0% no-repeat padding-box;
+  background-size: contain;
+  background-position: center;
+  width: 90%;
+  margin: 0 5%;
+  height: 679px;
+}
+
+.mt-8 {
+  margin-top: 8rem;
+}
+
+.bg-rectangle-dark {
+  background: #0000000d 0% 0% no-repeat padding-box;
+  background-size: cover;
+  opacity: 0.7;
+  background-position: center;
+  width: 90%;
+  margin: 0 5%;
+  height: 679px;
+}
+
+.medModalImg {
+  width: 15rem;
+  height: 22rem;
+  object-fit: cover;
+}
+
+.padding-right-5 {
+  padding-right: 3rem;
+}
+
+.padding-right-icon {
+  padding-right: 0.8rem;
+}
+
+.padding-left-2 {
+  padding-left: 1rem;
+}
+
+.pt-8 {
+  padding-top: 5rem;
+}
+
+.appSectionInner {
+  background: #0000000d 0% 0% no-repeat padding-box;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.appBtn {
+  background-color: white !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.appBtnIcon {
+  width: 6rem;
+}
+
+.footer-inner {
+  margin: auto;
+  padding-top: 10rem;
+  background-image: url("../public/assets/images/Ellipse-large.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.logo-footer {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+}
+
+.playImg {
+  width: 4.8rem;
+}
+
+.playImgLarge {
+  width: 6rem;
+}
+
+.boldText {
+  font-weight: bold !important;
+}
+
+.boldText600 {
+  font-weight: 600;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.biochemicalVideo {
+  width: 100%;
+  height: 600px;
+  border-radius: 0.5rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.medVideo {
+  width: 100%;
+  height: 550px;
+  border-radius: 0.5rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.medObjImg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px 0 0 5px;
+}
+
+.vertical-bottom {
+  vertical-align: text-bottom;
+}
+
+.playImgBiochem {
+  width: 5rem;
+  position: absolute;
+  top: 45%;
+  left: 40%;
+}
+
+.small-container .container {
+  max-width: 1120px !important;
+}
+
+.homeVidsContainer {
+  max-width: 1150px !important;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.zIndex {
+  z-index: 5;
+}
+
+.search-input {
+  padding: 1.2rem 0.8rem 1.2rem 4rem !important;
+  background-color: transparent !important;
+  border: 1px solid #adb5bd !important;
+}
+
+.calendar-input .form-control[readonly] {
+  padding: 1.2rem 0.8rem 1.2rem 4.5rem !important;
+  background-color: transparent !important;
+  border: 1px solid #adb5bd !important;
+}
+
+.clear {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.2rem;
+  font-size: larger;
+}
+
+.rdtPicker {
+  margin-left: -182px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: cover;
+}
+
+.calendar-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1.2rem;
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+
+.modal-content {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.overlayImgMed {
+  background: rgba(39, 46, 93, 0.5);
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+}
+
+.bioVidHeading {
+  letter-spacing: 0.5rem;
+}
+
+.art-bg {
+  background-image: url("../public/assets/images/bg_art.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+}
+
+.required {
+  color: red;
+}
+
+.pb-6 {
+  padding-bottom: 6rem !important;
+}
+
+.submitBtn {
+  background: #000083 0% 0% no-repeat padding-box !important;
+  box-shadow: 0px 15px 29px #7f7fc154 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.break-word {
+  overflow-wrap: break-word;
+}
+
+.col-20-percent {
+  width: 20% !important;
+  display: inline-block;
+}
+
+.pl-before-lg {
+  padding-left: 0 !important;
+}
+
+.pr-before-lg {
+  padding-left: 0 !important;
+}
+
+@media only screen and (max-width: 1550px) {
+  .navbar-nav a,
+  .navbar-nav a:hover,
+  .navbar-nav a:active,
+  .footerNav a,
+  .footerNav a:hover,
+  .footerNav a:active {
+    font-size: 0.8rem;
+    margin: 0 1.2rem;
+  }
+  .bio-vid-text {
+    font-size: 2.3rem;
+    left: 3.5rem;
+  }
+  .bio-vid-secondary-text {
+    left: 1rem;
+    font-size: 4.5rem;
+    line-height: 4rem;
+  }
+  .col-20-percent {
+    width: 25% !important;
+  }
+  .mediumContainer {
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1700px) {
+  .podcastImg {
+    height: 15rem !important;
+    width: 16rem !important;
+  }
+  .bg-rectangle-opaque {
+    height: 500px !important;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .navbar-nav a,
+  .navbar-nav a:hover,
+  .navbar-nav a:active,
+  .footerNav a,
+  .footerNav a:hover,
+  .footerNav a:active {
+    font-size: 0.6rem;
+    margin: 0 1rem;
+  }
+  .bio-vid-text {
+    font-size: 2rem;
+    left: 3rem;
+  }
+  .bio-vid-secondary-text {
+    font-size: 3rem;
+    line-height: 2.5rem;
+  }
+  .homeVidsContainer {
+    max-width: 100% !important;
+  }
+  .col-20-percent {
+    width: 33.3% !important;
+  }
+}
+
+.mediumContainer {
+  max-width: 1500px;
+  margin: auto;
+}
+
+.bookImg {
+  width: 14rem;
+  height: 21rem;
+  object-fit: cover;
+}
+
+.podcastImg {
+  width: 21rem;
+  height: 19rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 5px 5px 0 0;
+}
+
+.websiteDiv {
+  background: #e9ebf6 0% 0% no-repeat padding-box;
+  box-shadow: 0px 33px 56px #623cea2e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 5px;
+}
+
+.websiteDiv::after {
+  content: "";
+  display: block;
+  width: 90%;
+  margin: 2em -3rem -1.5rem;
+  border-bottom: solid #000083;
+}
+
+.page-item.active .page-link {
+  background-color: #7f7fc1 !important;
+  border-color: #7f7fc1 !important;
+  color: white !important;
+}
+
+.mt-neg-4 {
+  margin-top: -3.6rem;
+}
+
+.page-link {
+  color: #7f7fc1 !important;
+}
+
+.px-after-sm {
+  padding: 0 3rem !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .appSection {
+    margin: 0 4rem;
+    padding: 4rem 0;
+  }
+  .intoText {
+    font-size: 4rem;
+  }
+  .footerNav a {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .meditationDiv {
+    margin: auto 2rem;
+    background-image: linear-gradient(to right, #efebff 50%, white 50%);
+  }
+  .bio-vid-text {
+    left: 8rem;
+  }
+  .bio-vid-secondary-text {
+    left: 3rem;
+  }
+  .nutritionFlex {
+    flex-direction: column-reverse;
+  }
+  .text-center-medium {
+    text-align: center;
+  }
+  .medObjImg,
+  .medModalImg {
+    width: 5rem;
+    height: 5rem;
+  }
+  .display-lg-inline {
+    display: inline-block;
+  }
+  .display-lg-none {
+    display: none;
+  }
+  .paddingTopBefore-lg-2 {
+    padding-top: 1.5rem;
+  }
+  .pxBefore-lg-5 {
+    padding: 3rem !important;
+  }
+  .bg-form {
+    margin: 0 4rem;
+    padding: 2rem 0;
+  }
+  .pl-before-lg {
+    padding-left: 2rem !important;
+  }
+  .pr-before-lg {
+    padding-right: 2rem !important;
+  }
+  .col-20-percent {
+    width: 50% !important;
+  }
+  .videoDiv {
+    width: 90%;
+    margin-bottom: 5rem;
+  }
+  .padding-left-2 {
+    padding-left: 3rem;
+  }
+  .eventDiv {
+    width: max-content;
+    height: max-content;
+    border-radius: 2%;
+    padding: 1rem;
+  }
+  .eventDivOuter {
+    height: inherit !important;
+    width: max-content !important;
+  }
+  .dropdown-menu {
+    background-color: transparent !important;
+    border: none !important;
+  }
+  .dropdown-item {
+    padding-left: 2rem !important;
+  }
+  .active-dropdown a {
+    background-color: transparent !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .bg-rectangle-opaque,
+  .bg-rectangle-dark,
+  .bg-rectangle {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .appSection {
+    margin: 0 2rem;
+    padding: 2rem 0;
+  }
+  .bio-vid-text {
+    left: 5rem;
+  }
+  .bio-vid-secondary-text {
+    left: 2rem;
+  }
+  .navbar {
+    padding: 1rem;
+  }
+  .biochemVideoObj {
+    width: 20rem;
+  }
+
+  .biochemImg {
+    width: 20rem;
+    height: 18rem;
+  }
+  .bg-form {
+    margin: 0 2rem;
+    padding: 1rem 0;
+  }
+  .col-20-percent {
+    width: 100% !important;
+  }
+  .videoImg {
+    width: 100% !important;
+    height: 18rem;
+  }
+  .podcastImg {
+    width: 20rem;
+    height: 18rem;
+  }
+  .px-after-sm {
+    padding: 0 1rem !important;
+  }
+  .eventDate {
+    font-size: 2.5rem !important;
+  }
+  .eventDay {
+    font-size: 1rem !important;
+  }
+  .search-input {
+    padding: 0.8rem 0.8rem 0.8rem 2rem !important;
+  }
+  .calendar-input .form-control[readonly] {
+    padding: 0.8rem 0.8rem 0.8rem 2.6rem !important;
+  }
+  .clear {
+    top: 0.95rem;
+  }
+  .search-icon {
+    top: 1.1rem;
+    left: 0.6rem;
+    width: 1rem;
+    height: 1rem;
+  }
+  .calendar-icon {
+    top: 1rem;
+    left: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+.rhap_additional-controls,
+.rhap_volume-controls,
+#rhap_current-time {
+  display: none !important;
+}
+
+.rhap_container {
+  background: #d9d6e7 !important;
+  border: 1px solid #dee0e4 !important;
+  box-shadow: none !important;
+}
+
+.rhap_main {
+  flex-direction: row-reverse !important;
+}
+
+.rhap_controls-section {
+  margin-top: 0 !important;
+  flex: none !important;
+}
+
+.rhap_progress-indicator {
+  background: white !important;
+  border: 1px solid black !important;
+  height: 15px !important;
+  width: 15px !important;
+  top: -5px !important;
+  margin-left: -7px !important;
+}
+
+.rhap_progress-filled {
+  background-color: #3a3a73 !important;
+}
+
+.playIcon {
+  color: #3a3a73;
+  font-size: small;
+}
+
+.rhap_main-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content !important;
+}
+
+.rhap_total-time {
+  font-size: small !important;
+}
+
+.rhap_download-progress {
+  background-color: #9e9fa5 !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
+.line-height {
+  line-height: 1.8rem;
+}
+
+.eventDate {
+  font-size: 3.5rem;
+  letter-spacing: 2.4px;
+}
+
+.eventTime {
+  letter-spacing: 0.9px;
+  color: #efebff;
+}
+
+.eventName {
+  vertical-align: text-top;
+  margin-top: 1rem;
+}
+
+.display-lg-none {
+  vertical-align: middle;
+  margin-top: 1rem;
+}
+
+.successToast {
+  background: #76d89c !important;
+  border-color: #76d89c !important;
+}
+
+.errorToast {
+  background: red !important;
+  border-color: red !important;
+}
+
+.successToast div,
+.errorToast div {
+  color: white;
+  font-weight: bold;
+}
+
+.pageIcon {
+  padding: 0.45rem 0.5rem;
+  background-color: white;
+  height: 1.85rem;
+  margin-top: 1px;
+}
+
+.faqDiv {
+  background-color: white;
+  border-radius: 1rem;
+  font-family: Gilroy;
+}
+
+.faqQuestion {
+  font-weight: bold;
+  font-size: 1.1rem;
+  font-family: Gilroy;
+}
+
+.mobileHeading {
+  font-family: serif;
+}
+
+.ql-font-serif,
+.ql-font-serif * {
+  font-family: serif !important;
+}
+
+.ql-font-san-serif,
+.ql-font-san-serif * {
+  font-family: sans-serif !important;
+}
+
+.ql-font-monospace,
+.ql-font-monospace * {
+  font-family: monospace !important;
+}

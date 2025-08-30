@@ -28,7 +28,6 @@ const Font = ReactQuill.Quill.import("formats/font");
 Font.whitelist = ["serif", "san-serif", "monospace"];
 ReactQuill.Quill.register(Font, true);
 
-// ✅ Fixed vocabulary of moods (strings)
 const FIXED_MOODS = [
   "Calm",
   "Sleep",
@@ -148,8 +147,8 @@ const AddMeditation = () => {
         setAudio(data.audio);
         setAudioName(/[^/]*$/.exec(data.audio || "")?.[0] || "");
         setImageName(/[^/]*$/.exec(data.image || "")?.[0] || "");
-        // ✅ moods are strings on the doc; ensure array
-        setSelectedMoods(Array.isArray(data.moods) ? data.moods : []);
+
+        setSelectedMoods(data.moods || []);
       })
       .catch((err) => console.log(err));
   };
@@ -169,7 +168,7 @@ const AddMeditation = () => {
           JSON.stringify(selectedMoods.slice().sort());
 
       if (nothingChanged) {
-        toast.success("Meditation Updated Successfuly", updateToast);
+        toast.success("Meditation Updated Successfully", updateToast);
         setSpinner(false);
         return;
       }
@@ -208,7 +207,7 @@ const AddMeditation = () => {
         description: fontClasses + desc,
         image: uploadedImage || image,
         audio: uploadedAudio || audio,
-        moods: selectedMoods, // ✅ strings
+        moods: selectedMoods, // Send mood titles as strings
       };
 
       if (id) {
@@ -222,13 +221,13 @@ const AddMeditation = () => {
         toast.error("Meditation already exists on specified Date", errorToast);
       } else {
         id
-          ? toast.success("Meditation Updated Successfuly", updateToast)
-          : toast.success("Meditation Added Successfuly", successToast);
+          ? toast.success("Meditation Updated Successfully", updateToast)
+          : toast.success("Meditation Added Successfully", successToast);
         setErrorMessage(false);
       }
 
       if (!id && result?.created) {
-        // reset only if creating a new one
+        // Reset form only if creating a new meditation
         setMeditation(defaultMeditation);
         setDesc(defaultMeditation.description);
         setTitle(defaultMeditation.title);
@@ -245,7 +244,7 @@ const AddMeditation = () => {
           description: desc,
           image: payload.image,
           audio: payload.audio,
-          moods: selectedMoods,
+          moods: selectedMoods, // Keep the moods as strings
         });
       }
     } catch (err) {

@@ -2,53 +2,119 @@ import axios from "axios";
 import { getDuration } from "./utils";
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 
-const getCall = async (url) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(baseURL + url)
-      .then((data) => {
-        resolve(data.data);
-      })
-      .catch((err) => reject(err));
-  });
+// const getCall = async (url) => {
+//   return new Promise((resolve, reject) => {
+//     axios
+//       .get(baseURL + url)
+//       .then((data) => {
+//         resolve(data.data);
+//       })
+//       .catch((err) => reject(err));
+//   });
+// };
+const getCall = async (url, params = {}) => {
+  const queryParams = new URLSearchParams(params).toString();
+  try {
+    const response = await axios.get(`${baseURL + url}?${queryParams}`);
+    console.log("API Call Successful:", response.data); // Log response data
+    return response.data;
+  } catch (err) {
+    console.error("Error in GET request:", err); // Log if request fails
+    throw err;
+  }
 };
 
+// Function to perform POST requests
 const postCall = async (url, data) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post(baseURL + url, data)
-      .then((data) => {
-        resolve(data.data);
-      })
-      .catch((err) => reject(err));
-  });
+  try {
+    const response = await axios.post(baseURL + url, data);
+    return response.data; // Return the response data
+  } catch (err) {
+    console.error("Error in POST request:", err);
+    throw err; // Throw the error for further handling
+  }
 };
 
+// Function to get home videos (example)
 export const getHomeVideos = () => {
-  return new Promise((resolve, reject) => {
-    getCall("/compulsory-video")
-      .then((data) => resolve(data))
-      .catch((err) => reject(err));
-  });
+  return getCall("/compulsory-video");
 };
 
+// export const getMeditations = async (body) => {
+//   console.log("Starting to fetch meditations...");
+//   try {
+//     const meds = await getCall("/meditation", body);
+
+//     let meditationsArray = [];
+//     if (Array.isArray(meds.meditations)) {
+//       meditationsArray = meds.meditations;
+//     } else if (meds && typeof meds === "object" && meds._id) {
+//       meditationsArray = [meds];
+//     }
+
+//     console.log("Processing durations for meditations with meds ...", meds);
+//     console.log(
+//       "Processing durations for meditations with meditationArray...",
+//       meditationsArray
+//     );
+
+//     for (let i = 0; i < meds.length; i++) {
+//       meds[i].duration = meds[i].audio ? await getDuration(meds[i].audio) : "";
+//     }
+
+//     console.log("Fetched Meditations:", {
+//       meditations: meds,
+//       count: meds.length,
+//     });
+
+//     // Return the meditations and count
+//     return { meditations: meditationsArray, count: meditationsArray.length };
+//   } catch (err) {
+//     console.log("Error fetching meditations:", err); // Log any errors
+//     throw err;
+//   }
+// };
+
+//   console.log("Starting to fetch meditations...");
+//   try {
+//     const { skip, take, mood, search } = body;
+//     const query = new URLSearchParams({
+//       skip,
+//       take,
+//       mood,
+//       search,
+//     }).toString(); // Format query params correctly
+
+//     const meds = await getCall(`/meditation?${query}`); // Make sure the URL is formed correctly
+
+//     console.log("API Response:", meds);
+
+//     return meds;
+//   } catch (err) {
+//     console.log("Error fetching meditations:", err); // Log any errors
+//     throw err;
+//   }
+// };
 export const getMeditations = async (body) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const meds = await postCall("/meditation", {
-        ...body,
-        ...{ filter: "past" },
-      });
-      for (let i = 0; i < meds.meditations.length; i++) {
-        meds.meditations[i].duration = meds.meditations[i].audio
-          ? await getDuration(meds.meditations[i].audio)
-          : "";
-      }
-      resolve(meds);
-    } catch (err) {
-      reject(err);
-    }
-  });
+  console.log("Starting to fetch meditations...");
+  try {
+    // const { skip, take, mood, search } = body;
+    // const query = new URLSearchParams({
+    //   skip,
+    //   take,
+    //   mood,
+    //   search,
+    // }).toString();
+    // const meds = await getCall(`/meditation?${query}`);
+    const meds = await postCall(`/meditation`, body);
+
+    console.log("API Response:", meds);
+
+    return meds;
+  } catch (err) {
+    console.log("Error fetching meditations:", err); // Log any errors
+    throw err;
+  }
 };
 
 export const getBiochemVideos = () => {

@@ -10,11 +10,6 @@ const moodSchema = new Schema(
       trim: true,
       unique: true,
     },
-    sheet: {
-      type: Schema.Types.ObjectId,
-      ref: "sheet",
-      required: true,
-    },
   },
   { timestamps: true }
 );

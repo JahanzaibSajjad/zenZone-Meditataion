@@ -4,6 +4,7 @@ import axios from "axios";
 export const uploadFile = async (file, key) => {
   try {
     const url = await authorizedPostCall("/aws/get-url", { key });
+    console.log("url->   ", url);
     await axios.put(url, file, {
       headers: {
         "Content-Type": file.type,

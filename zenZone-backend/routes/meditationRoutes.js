@@ -6,7 +6,9 @@ router.get("/:id", meditationController.getOneMeditation);
 
 router.post("/", meditationController.getAllMeditations);
 
-router.get("/", meditationController.getTodayMeditation);
+router.get("/", meditationController.getAllMeditations);
+
+router.get("/today", meditationController.getTodayMeditation);
 
 router.put(
   "/:id",

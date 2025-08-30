@@ -10,7 +10,6 @@ import {
 import { getMeditations } from "../../services/APIsService";
 import MeditationModal from "../common/MeditationModal";
 
-/** FEELING → RECOMMENDED TAG (your “opposite” mapping) */
 const FEELING_TO_TAG = {
   Anxious: "Calm",
   Stressed: "Calm",
@@ -20,7 +19,6 @@ const FEELING_TO_TAG = {
 };
 const FEELINGS = Object.keys(FEELING_TO_TAG);
 
-/** Fixed mood chips (match admin’s fixed set) */
 const FIXED_MOODS = [
   { name: "Calm", emoji: "😌" },
   { name: "Sleep", emoji: "😴" },
@@ -65,6 +63,7 @@ const Meditations = () => {
 
   // Initial and reactive fetch
   useEffect(() => {
+    console.log("Fetching meditations with body:", buildQuery(1));
     fetchMeditations(buildQuery(1));
     setPage(1);
   }, [search, selectedTag]);
@@ -100,13 +99,26 @@ const Meditations = () => {
     return pagesArr;
   };
 
-  // “I feel …” sets the recommended mood tag
+  // Handle feeling click - sets the mood based on feeling
   const handleFeeling = (f) => {
     const tag = FEELING_TO_TAG[f] || "";
     setFeeling(f);
     setSelectedTag(tag);
   };
 
+  // Handle mood click - sets the selected tag
+  const handleAllClick = () => {
+    setSelectedTag(""); // Clear the mood filter
+    console.log("Fetching all meditations...");
+    fetchMeditations({ skip: 0, take: 5, mood: "", search: search }); // Fetch all meditations
+  };
+
+  // Handle "All" click - resets the mood filter
+  const handleMoodClick = (mood) => {
+    setSelectedTag(mood);
+    console.log("Fetching meditations for mood:", mood);
+    fetchMeditations({ skip: 0, take: 5, mood: mood, search: search });
+  };
   // Reset filters
   const clearFilters = () => {
     setFeeling("");
@@ -131,7 +143,6 @@ const Meditations = () => {
             src="/assets/images/search-icon.png"
           />
         </div>
-
         {/* Feeling selector */}
         <div className="d-flex flex-wrap align-items-center gap-2 mt-3">
           <span className="paragraphDim">I feel:</span>
@@ -170,7 +181,6 @@ const Meditations = () => {
             </span>
           )}
         </div>
-
         {/* Mood chips bar (tags) */}
         <div className="d-flex flex-wrap align-items-center gap-2 mt-3">
           <span className="paragraphDim">Filter by mood:</span>
@@ -179,7 +189,7 @@ const Meditations = () => {
             pill
             bg={!selectedTag ? "secondary" : "light"}
             text={!selectedTag ? "light" : "dark"}
-            onClick={() => setSelectedTag("")}
+            onClick={handleAllClick}
             style={{
               cursor: "pointer",
               padding: "8px 12px",
@@ -195,9 +205,7 @@ const Meditations = () => {
               pill
               bg={selectedTag === m.name ? "secondary" : "light"}
               text={selectedTag === m.name ? "light" : "dark"}
-              onClick={() =>
-                setSelectedTag(selectedTag === m.name ? "" : m.name)
-              }
+              onClick={() => handleMoodClick(m.name)}
               style={{
                 cursor: "pointer",
                 padding: "8px 12px",
@@ -210,7 +218,6 @@ const Meditations = () => {
             </Badge>
           ))}
         </div>
-
         {/* List */}
         <div>
           {meditations.length ? (
@@ -227,54 +234,17 @@ const Meditations = () => {
                       className="medObjImg d-inline-block"
                       style={{ backgroundImage: `url(${meditation.image})` }}
                     />
-                    <div className="vertical-bottom d-lg-none display-lg-inline mx-3">
-                      <h1 className="mt-1 text-capitalize MorganiteFont">
-                        {meditation.title}
-                      </h1>
-                    </div>
                   </Col>
                   <Col className="py-4 px-lg-5" lg="9">
-                    <h1 className="mt-3 text-capitalize MorganiteFont display-lg-none">
+                    <h1 className="mt-3 text-capitalize MorganiteFont">
                       {meditation.title}
                     </h1>
-                    <div className="paragraphDim MontserratFont meditation-desc mb-0">
-                      <span>
-                        {meditation.description
-                          ?.replace(/(<style[\w\W]+style>)/g, "")
-                          ?.replace(/(<([^>]+)>)/gi, "")
-                          ?.replace(/&.*;/g, "")
-                          ?.slice(
-                            0,
-                            window.innerWidth > 500
-                              ? meditation.description.length
-                              : 80
-                          )}
-                      </span>
-                      <span>
-                        {window.innerWidth <= 500 &&
-                          meditation.description?.length > 80 && (
-                            <span>...</span>
-                          )}
-                      </span>
-
-                      {/* mood tags */}
-                      {Array.isArray(meditation.moods) &&
-                        meditation.moods.length > 0 && (
-                          <div className="mt-2">
-                            {meditation.moods.map((t) => (
-                              <Badge
-                                key={t}
-                                bg="light"
-                                text="dark"
-                                className="me-1"
-                                style={{ border: "1px solid #e6e6f0" }}
-                              >
-                                {t}
-                              </Badge>
-                            ))}
-                          </div>
-                        )}
-                    </div>
+                    <div
+                      className="paragraphDim MontserratFont meditation-desc mb-0"
+                      dangerouslySetInnerHTML={{
+                        __html: meditation.description,
+                      }}
+                    />
                   </Col>
                 </Row>
               </div>
@@ -284,32 +254,6 @@ const Meditations = () => {
               No records found
             </div>
           )}
-
-          {/* Pagination */}
-          <div className="pt-5 d-flex align-items-center justify-content-end">
-            <Pagination size="sm">
-              <i
-                role="button"
-                onClick={(e) =>
-                  currentPage > 1 && handlePageClick(e, currentPage - 1)
-                }
-                className={
-                  (currentPage <= 1 ? "paragraphDim" : "") +
-                  " fa fa-angle-left pageIcon"
-                }
-              />
-              {pages()}
-              <i
-                role="button"
-                onClick={clickNext}
-                className={
-                  (currentPage >= Math.ceil(count / pageSize)
-                    ? "paragraphDim"
-                    : "") + " fa fa-angle-right pageIcon"
-                }
-              />
-            </Pagination>
-          </div>
         </div>
       </Container>
 

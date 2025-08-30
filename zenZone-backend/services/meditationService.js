@@ -16,6 +16,7 @@ const getOneMeditation = async (condition) => {
 const buildQuery = async (body = {}) => {
   const q = {};
 
+  // Search filter for title or description
   if (body.search) {
     q.$or = [
       { title: { $regex: body.search, $options: "i" } },
@@ -23,6 +24,7 @@ const buildQuery = async (body = {}) => {
     ];
   }
 
+  // Filter by date range
   if (body.date) {
     q.date = {
       $gte: `${body.date}-1`,
@@ -33,67 +35,37 @@ const buildQuery = async (body = {}) => {
     };
   }
 
+  // Filter by "past" meditations
   if (body.filter === "past") {
     q.date = { $lte: moment().utc().format("YYYY-MM-DD") };
   }
 
-  // NEW: mood filter (accepts id or title)
+  // Filter by mood if provided (now we expect a string, not ObjectId)
   if (body.mood) {
-    let moodId = null;
-    if (/^[0-9a-fA-F]{24}$/.test(body.mood)) {
-      moodId = body.mood;
-    } else {
-      const m = await Mood.findOne(
-        { title: new RegExp(`^${body.mood}$`, "i") },
-        "_id"
-      );
-      if (m) moodId = m._id;
-    }
-    if (moodId) q.moods = { $in: [moodId] };
+    q.moods = { $in: [new RegExp(`^${body.mood}$`, "i")] }; // String match in moods array
   }
 
   return q;
 };
 
 const getAllMeditations = async (body) => {
-  return new Promise((resolve, reject) => {
-    const q = {
-      ...(body.search && {
-        $or: [
-          { title: { $regex: body.search, $options: "i" } },
-          { description: { $regex: body.search, $options: "i" } },
-        ],
-      }),
-      ...(body.date && {
-        date: {
-          $gte: `${body.date}-1`,
-          $lte: moment([body.date.split("-")[0], body.date.split("-")[1] - 1])
-            .endOf("month")
-            .format("YYYY-MM-DD")
-            .toString(),
-        },
-      }),
-      ...(body.filter === "past" && {
-        date: { $lte: moment().utc().format("YYYY-MM-DD") },
-      }),
-    };
+  try {
+    const q = await buildQuery(body); // Build query based on filters
 
-    // ✅ NEW: filter by mood string if provided
-    if (body.mood) {
-      q.moods = { $in: [new RegExp(`^${body.mood}$`, "i")] };
-    }
+    const [meditations, count] = await Promise.all([
+      MeditationModel.find(q)
+        .sort({ date: "descending" })
+        .limit(body?.take ? body?.take : 10)
+        .skip(body?.skip ? body?.skip : 0)
+        .populate("moods", "title"), // Populate moods field with title
+      MeditationModel.countDocuments(q),
+    ]);
 
-    MeditationModel.find(q)
-      .sort({ date: "descending" })
-      .limit(body?.take ? body?.take : 10)
-      .skip(body?.skip ? body?.skip : 0)
-      .then((meditations) => {
-        MeditationModel.countDocuments(q)
-          .then((count) => resolve({ count, meditations }))
-          .catch((err) => reject(err));
-      })
-      .catch((err) => reject(err));
-  });
+    return { count, meditations };
+  } catch (err) {
+    console.error("Error in fetching meditations:", err);
+    throw err;
+  }
 };
 
 const updateMeditation = async (condition, data) => {
@@ -114,16 +86,40 @@ const deleteMeditation = async (condition) => {
 };
 
 const addMeditation = async (data) => {
-  return new Promise((resolve, reject) => {
-    new MeditationModel(data)
-      .save()
-      .then((data) =>
-        MeditationModel.findById(data._id)
-          .populate("moods", "title")
-          .then((d) => resolve(d))
-      )
-      .catch((err) => reject(err));
-  });
+  try {
+    // Get mood ObjectIds for the provided moods (which are strings)
+    const moodObjects = await Mood.find({ title: { $in: data.moods } });
+
+    // If any moods are not found, throw an error
+    if (moodObjects.length !== data.moods.length) {
+      throw new Error("One or more moods not found in the database.");
+    }
+
+    // Map the mood titles to ObjectId
+    const moodIds = moodObjects.map((mood) => mood._id);
+
+    // Create and save the meditation with the mood ObjectIds
+    const newMeditation = new MeditationModel({
+      title: data.title,
+      description: data.description,
+      image: data.image,
+      audio: data.audio,
+      date: data.date,
+      moods: moodIds, // Store mood ObjectIds
+    });
+
+    const savedMeditation = await newMeditation.save();
+
+    // Return populated meditation with moods
+    const populatedMeditation = await MeditationModel.findById(
+      savedMeditation._id
+    ).populate("moods", "title");
+
+    return populatedMeditation;
+  } catch (err) {
+    console.error("Error in adding meditation:", err);
+    throw err;
+  }
 };
 
 module.exports = {

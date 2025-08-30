@@ -24,9 +24,7 @@ const meditationSchema = new Schema(
       type: Date,
       required: true,
     },
-
-    // NEW: moods tagged to this meditation
-    moods: [{ type: String, trim: true }],
+    moods: [String],
   },
   { timestamps: true }
 );

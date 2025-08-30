@@ -6,6 +6,7 @@ const moment = require("moment");
 
 // GET /meditations/:id
 const getOneMeditation = async (req, res) => {
+  console.log("Get onemeditation called");
   meditationService
     .getOneMeditation({ _id: req.params.id })
     .then((meditation) =>
@@ -15,50 +16,46 @@ const getOneMeditation = async (req, res) => {
 };
 
 // POST /meditations  (list with paging/search/mood)
+
 const getAllMeditations = async (req, res) => {
   try {
     const { skip = 0, take = 10, search = "", mood } = req.body || {};
     const q = {};
 
+    // Handle search
     if (search) {
-      // if text index exists
-      q.$text = { $search: search };
-      // (fallback if you prefer regex)
-      // q.$or = [{ title: new RegExp(search, "i") }, { description: new RegExp(search, "i") }];
+      q.$text = { $search: search }; // Search by title or description
     }
 
+    console.log("mood received at backend is ->", mood);
+
+    // Handle mood filter as string (direct matching with mood array in database)
     if (mood) {
-      let moodId = null;
-      // if looks like ObjectId, accept as id; otherwise resolve by title
-      if (/^[0-9a-fA-F]{24}$/.test(mood)) {
-        moodId = mood;
-      } else {
-        const m = await Mood.findOne(
-          { title: new RegExp(`^${mood}$`, "i") },
-          "_id"
-        );
-        if (m) moodId = m._id;
-      }
-      if (moodId) q.moods = { $in: [moodId] };
+      // Directly filter by the string mood in the array of moods
+      q.moods = { $in: [mood] }; // Mood is directly a string, no need for ObjectId conversion
     }
 
+    // Fetch meditations based on the query
     const [items, count] = await Promise.all([
       Meditation.find(q)
-        .populate("moods", "title") // return mood titles
+        .populate("moods", "title") // Populate the moods' titles (if you need them)
         .sort({ date: -1, createdAt: -1 })
-        .skip(Number(skip))
-        .limit(Number(take)),
-      Meditation.countDocuments(q),
+        .skip(Number(skip)) // Pagination - skip
+        .limit(Number(take)), // Pagination - limit
+      Meditation.countDocuments(q), // Count of total documents matching the filter
     ]);
 
+    // Return the filtered meditations and count
     return res.status(200).json({ meditations: items, count });
   } catch (err) {
+    console.error("Error in fetching meditations:", err);
     return res.status(500).send(err);
   }
 };
 
 // GET /meditations  (today)
 const getTodayMeditation = async (req, res) => {
+  console.log("hello");
   const today = moment.utc(moment()).format("YYYY-MM-DD").toString();
   meditationService
     .getOneMeditation({ date: { $lte: new Date(today) } })
@@ -117,12 +114,15 @@ const deleteMeditation = async (req, res) => {
 // POST /meditations/add
 const addMeditation = async (req, res) => {
   try {
+    console.log("Request body:", req.body);
+
     if (!req.body.date) return res.status(422).send("Date not provided");
 
-    // ensure moods is an array if provided
     if (req.body.moods && !Array.isArray(req.body.moods)) {
-      req.body.moods = [];
+      req.body.moods = [req.body.moods];
     }
+
+    console.log("Processed moods array:", req.body.moods);
 
     const alreadyExists = await meditationService.getOneMeditation({
       date: req.body.date,
@@ -134,21 +134,29 @@ const addMeditation = async (req, res) => {
       });
     }
 
-    meditationService
-      .addMeditation(req.body)
-      .then(async (meditation) => {
-        const populated = await Meditation.findById(meditation._id).populate(
-          "moods",
-          "title"
-        );
-        return res.status(200).json({
-          created: true,
-          message: "created successfully",
-          meditation: populated,
-        });
-      })
-      .catch((err) => res.status(500).send(err));
+    const newMeditation = new Meditation({
+      title: req.body.title,
+      description: req.body.description,
+      image: req.body.image,
+      audio: req.body.audio,
+      date: req.body.date,
+      moods: req.body.moods,
+    });
+
+    await newMeditation.save();
+
+    // Populate the moods with titles (optional, if needed for returning the names)
+    const populatedMeditation = await Meditation.findById(
+      newMeditation._id
+    ).populate("moods", "title");
+
+    return res.status(200).json({
+      created: true,
+      message: "Meditation created successfully",
+      meditation: populatedMeditation,
+    });
   } catch (err) {
+    console.error("Error in adding meditation:", err);
     res.status(500).send(err);
   }
 };

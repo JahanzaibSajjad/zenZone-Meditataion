@@ -56,7 +56,7 @@ const Meditations = () => {
     getMeditations(body)
       .then((data) => {
         setMeditations(data.meditations || []);
-        setCount(data.count || 0);
+        setCount(data.count || 0); // Ensure that the total count is returned from the API
       })
       .catch((err) => console.log(err));
   };
@@ -70,8 +70,8 @@ const Meditations = () => {
 
   const handlePageClick = (e, pageNumber) => {
     e.preventDefault();
-    fetchMeditations(buildQuery(pageNumber));
-    setPage(pageNumber);
+    fetchMeditations(buildQuery(pageNumber)); // Fetch new data for the selected page
+    setPage(pageNumber); // Update current page state to reflect the selected page
   };
 
   const clickNext = (e) =>
@@ -84,8 +84,9 @@ const Meditations = () => {
   };
 
   const pages = () => {
+    const totalPages = Math.ceil(count / pageSize); // Total number of pages
     const pagesArr = [];
-    for (let i = 1; i <= Math.ceil(count / pageSize); i++) {
+    for (let i = 1; i <= totalPages; i++) {
       pagesArr.push(
         <Pagination.Item
           onClick={(e) => handlePageClick(e, i)}
@@ -99,7 +100,6 @@ const Meditations = () => {
     return pagesArr;
   };
 
-  // Handle feeling click - sets the mood based on feeling
   const handleFeeling = (f) => {
     const tag = FEELING_TO_TAG[f] || "";
     setFeeling(f);
@@ -110,7 +110,7 @@ const Meditations = () => {
   const handleAllClick = () => {
     setSelectedTag(""); // Clear the mood filter
     console.log("Fetching all meditations...");
-    fetchMeditations({ skip: 0, take: 5, mood: "", search: search }); // Fetch all meditations
+    fetchMeditations({ skip: 0, take: 5, mood: "", search: search });
   };
 
   // Handle "All" click - resets the mood filter
@@ -119,6 +119,7 @@ const Meditations = () => {
     console.log("Fetching meditations for mood:", mood);
     fetchMeditations({ skip: 0, take: 5, mood: mood, search: search });
   };
+
   // Reset filters
   const clearFilters = () => {
     setFeeling("");
@@ -255,6 +256,9 @@ const Meditations = () => {
             </div>
           )}
         </div>
+        {count > pageSize && (
+          <Pagination className="justify-content-center">{pages()}</Pagination>
+        )}
       </Container>
 
       <MeditationModal

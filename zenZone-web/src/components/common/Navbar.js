@@ -49,13 +49,19 @@ const TopNav = () => {
             >
               Meditation
             </Link>
-            <Link
+            {/* <Link
+              to="/chatbot"
+              className={active === "/chatbot" ? "active" : ""}
+            >
+              Chat with ZenBot
+            </Link> */}
+            {/* <Link
               onClick={() => setExpanded(false)}
               className={active === "/biochemical-balance" ? "active" : ""}
               to="/biochemical-balance"
             >
               Biochemical Balance
-            </Link>
+            </Link> */}
             <Link
               onClick={() => setExpanded(false)}
               className={active === "/nutrition-consultation" ? "active" : ""}
@@ -63,7 +69,29 @@ const TopNav = () => {
             >
               Nutrition Consultation
             </Link>
-            <NavDropdown
+            <Link
+              onClick={() => setExpanded(false)}
+              className={active === "/books" ? "active-dropdown" : ""}
+              to="/books"
+            >
+              Library
+            </Link>
+            <Link
+              onClick={() => setExpanded(false)}
+              div
+              className={active === "/podcasts" ? "active-dropdown" : ""}
+              to="/podcasts"
+            >
+              Podcasts
+            </Link>
+            <Link
+              onClick={() => setExpanded(false)}
+              className={active === "/websites" ? "active-dropdown" : ""}
+              to="/websites"
+            >
+              Websites
+            </Link>
+            {/* <NavDropdown
               className={
                 active === "/books" ||
                 active === "/podcasts" ||
@@ -98,7 +126,7 @@ const TopNav = () => {
                   Third-party Websites
                 </NavDropdown.Item>
               </div>
-            </NavDropdown>
+            </NavDropdown> */}
             <Link
               onClick={() => setExpanded(false)}
               className={active === "/events" ? "active" : ""}
@@ -106,13 +134,13 @@ const TopNav = () => {
             >
               Events
             </Link>
-            <Link
+            {/* <Link
               onClick={() => setExpanded(false)}
               className={active === "/donate" ? "active" : ""}
               to="/donate"
             >
               Donate
-            </Link>
+            </Link> */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

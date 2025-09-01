@@ -21,9 +21,8 @@ import ContactUs from "./views/ContactUs";
 import PastMeditations from "./views/PastMeditations";
 import FAQs from "./views/FAQs";
 import PrivacyPolicy from "./views/PrivacyPolicy";
-
-// ✅ Correct path (index.js and ZenBot.jsx are both in src/)
 import ZenBot from "./zenBot.jsx";
+import ChatbotPage from "./views/ChatbotPage.js";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -31,6 +30,7 @@ ReactDOM.render(
       <ZenBot />
       <div>
         <Switch>
+          <Route path="/chatbot" component={ChatbotPage} />
           <Route path="/events" component={Events} />
           <Route path="/books" component={Books} />
           <Route path="/podcasts" component={Podcasts} />
@@ -46,6 +46,8 @@ ReactDOM.render(
           <Route path="/past-meditation" component={PastMeditations} />
           <Route path="/faqs" component={FAQs} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
+
+          {/* Chatbot route should be below the default route */}
 
           {/* Default route last */}
           <Route path="/" component={Home} />

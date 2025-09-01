@@ -25,7 +25,7 @@ cron.schedule("0 0 * * *", pushNewMeditationData, {
 });
 
 //Routes
-app.use("/api/v1/chat", require("./routes/chatRoutes"));
+app.use("/api/v1/chat", require("./routes/chatbotRoutes"));
 app.use("/api/v1/meditation", require("./routes/meditationRoutes"));
 app.use("/api/v1/mood", require("./routes/moodRoutes"));
 app.use("/api/v1/sheet", require("./routes/sheetRoutes"));

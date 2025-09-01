@@ -202,3 +202,13 @@ export async function askZenBot(message) {
     return { reply: "Network error. Please try again." };
   }
 }
+
+export const sendChatMessage = async (message) => {
+  try {
+    const response = await axios.post(`${baseURL}/chat/message`, { message });
+    return response.data.response;
+  } catch (error) {
+    console.error("Error sending message:", error);
+    return "Sorry, there was an issue. Please try again.";
+  }
+};

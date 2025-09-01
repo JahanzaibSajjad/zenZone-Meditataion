@@ -1,3 +1,4 @@
+import { any } from "prop-types";
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import { Card, CardHeader, Col, Form, Input, Row } from "reactstrap";
@@ -29,17 +30,32 @@ const CompulsoryVideos = ({ setSpinner, toast }) => {
   }, []);
 
   const fetchData = async () => {
-    fetchCompulsoryVideo().then((data) => {
-      setH1Url(data.home_1.url);
-      setH2Url(data.home_2.url);
-      setMedUrl(data.meditation.url);
-      setBioUrl(data.biochemical.url);
-      setH1Desc(data.home_1.description);
-      setH2Desc(data.home_2.description);
-      setMedDesc(data.meditation.description);
-      setBioDesc(data.biochemical.description);
-      setSpinner(false);
-    });
+    try {
+      const data = await fetchCompulsoryVideo();
+      // Check if the expected fields exist in the response
+      if (
+        data &&
+        data.home_1 &&
+        data.home_2 &&
+        data.meditation &&
+        data.biochemical
+      ) {
+        setH1Url(data.home_1.url);
+        setH2Url(data.home_2.url);
+        setMedUrl(data.meditation.url);
+        setBioUrl(data.biochemical.url);
+        setH1Desc(data.home_1.description);
+        setH2Desc(data.home_2.description);
+        setMedDesc(data.meditation.description);
+        setBioDesc(data.biochemical.description);
+      } else {
+        console.error(
+          "Error: Video data structure is incorrect or missing fields"
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   const handleSubmit = (type, url, description) => {
@@ -89,7 +105,7 @@ const CompulsoryVideos = ({ setSpinner, toast }) => {
                       className={!h1Url && showError ? "is-invalid url" : "url"}
                       placeholder="Add URL"
                       type="url"
-                      value={h1Url}
+                      value={h1Url || ""}
                       onChange={(e) => setH1Url(e.target.value)}
                     />
                   </Col>

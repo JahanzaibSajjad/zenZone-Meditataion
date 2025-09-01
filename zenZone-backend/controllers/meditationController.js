@@ -124,16 +124,6 @@ const addMeditation = async (req, res) => {
 
     console.log("Processed moods array:", req.body.moods);
 
-    const alreadyExists = await meditationService.getOneMeditation({
-      date: req.body.date,
-    });
-    if (alreadyExists) {
-      return res.status(200).json({
-        created: false,
-        message: "Meditation already exists for the date",
-      });
-    }
-
     const newMeditation = new Meditation({
       title: req.body.title,
       description: req.body.description,

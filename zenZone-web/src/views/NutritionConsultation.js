@@ -21,25 +21,24 @@ const NutritionConsultation = () => {
               md="12"
             >
               <div>
-                <div className="mx-md-5 my-5">
+                <div className="mx-5">
                   <p className="intoText text-center-medium MorganiteFont">
-                    NUTRITION CONSULTATION
+                    BALANCED HEALING
                     <br />
                     FOR{" "}
                     <span className="mainDarkColor MorganiteFont">HEROES</span>
                   </p>
                   <div className="py-2 px-3 leftBar">
                     <h4 className="mb-0 line-height SansProFont paragraphDim text-lg">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting
-                      <br />
-                      industry. Lorem Ipsum has been the industry's standard
-                      dummy
-                      <br />
-                      text ever since the 1500s, when an unknown printer took a
-                      galley
-                      <br />
-                      of type and scrambled it to make a type specimen book.
+                      At ZenZone, we believe in the power of mindfulness and
+                      meditation to promote mental wellness and relaxation. Our
+                      platform offers guided meditations, breathing exercises,
+                      and wellness tips tailored to help you manage stress,
+                      anxiety, and improve your overall well-being. Whether
+                      you're looking to relieve stress, sleep better, or find
+                      clarity, ZenZone is here to guide you towards a balanced
+                      and healthier lifestyle. Start your journey today and
+                      experience the transformation!
                     </h4>
                   </div>
                 </div>

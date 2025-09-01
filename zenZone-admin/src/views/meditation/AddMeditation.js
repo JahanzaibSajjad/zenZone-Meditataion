@@ -61,6 +61,71 @@ const AddMeditation = () => {
   const [imageChanged, setImageChanged] = useState(false);
   const [audioChanged, setAudioChanged] = useState(false);
 
+  // const initializeDropzone = () => {
+  //   const img = new Dropzone(document.getElementById("dropzone-single-image"), {
+  //     url: "#",
+  //     thumbnailWidth: null,
+  //     dictDefaultMessage:
+  //       '<i class="ni ni-cloud-upload-96 icon-color text-xl"></i><p>Click to upload or Drop file here</p>',
+  //     thumbnailHeight: null,
+  //     maxFiles: 1,
+  //     acceptedFiles: "image/*",
+  //     init: function () {
+  //       this.on("addedfile", function (file) {
+  //         let reader = new FileReader();
+  //         reader.readAsDataURL(file);
+  //         reader.onload = function (e) {
+  //           if (currentImageFile) {
+  //             this.removeFile(currentImageFile);
+  //           }
+  //           const convertedFile = dataURLtoFile(e.target.result, imageName);
+  //           isCorrectImageRatio(
+  //             convertedFile,
+  //             () => {
+  //               setImage(e.target.result);
+  //               setImageName(JSON.parse(JSON.stringify(file)).upload.filename);
+  //               setCurrentImageFile(convertedFile);
+  //               setImageChanged(true);
+  //             },
+  //             () => {
+  //               img.removeAllFiles();
+  //               toast.error(
+  //                 "Image Aspect Ratio not suitable for Mobile Devices",
+  //                 errorToast
+  //               );
+  //             }
+  //           );
+  //         };
+  //       });
+  //     },
+  //   });
+
+  //   new Dropzone(document.getElementById("dropzone-single-audio"), {
+  //     url: "#",
+  //     thumbnailWidth: null,
+  //     dictDefaultMessage:
+  //       '<i class="ni ni-cloud-upload-96 icon-color text-xl"></i><p>Click to upload or Drop file here</p>',
+  //     thumbnailHeight: null,
+  //     maxFiles: 1,
+  //     acceptedFiles: "audio/*",
+  //     init: function () {
+  //       this.on("addedfile", function (file) {
+  //         setAudioChanged(true);
+  //         if (currentAudioFile) {
+  //           this.removeFile(currentAudioFile);
+  //         }
+  //         setAudioName(JSON.parse(JSON.stringify(file)).upload.filename);
+  //         let reader = new FileReader();
+  //         reader.readAsDataURL(file);
+  //         reader.onload = function (e) {
+  //           setAudio(e.target.result);
+  //           const convertedFile = dataURLtoFile(e.target.result, audioName);
+  //           setCurrentAudioFile(convertedFile);
+  //         };
+  //       });
+  //     },
+  //   });
+  // };
   const initializeDropzone = () => {
     const img = new Dropzone(document.getElementById("dropzone-single-image"), {
       url: "#",
@@ -79,22 +144,16 @@ const AddMeditation = () => {
               this.removeFile(currentImageFile);
             }
             const convertedFile = dataURLtoFile(e.target.result, imageName);
-            isCorrectImageRatio(
-              convertedFile,
-              () => {
-                setImage(e.target.result);
-                setImageName(JSON.parse(JSON.stringify(file)).upload.filename);
-                setCurrentImageFile(convertedFile);
-                setImageChanged(true);
-              },
-              () => {
-                img.removeAllFiles();
-                toast.error(
-                  "Image Aspect Ratio not suitable for Mobile Devices",
-                  errorToast
-                );
-              }
-            );
+
+            // REMOVE aspect ratio check
+            // Comment out or remove this aspect ratio validation entirely.
+            setImage(e.target.result);
+            setImageName(JSON.parse(JSON.stringify(file)).upload.filename);
+            setCurrentImageFile(convertedFile);
+            setImageChanged(true);
+
+            // No need to check aspect ratio anymore
+            // No "image aspect ratio" validation
           };
         });
       },
